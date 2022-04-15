@@ -2,7 +2,7 @@
 % Please edit documentation in R/graphsearch.R
 \name{GraphSearch}
 \alias{GraphSearch}
-\title{GraphSearch}
+\title{Solver for Graph Search}
 \usage{
 GraphSearch(
   arcSources,
@@ -26,18 +26,20 @@ edges}
 
 \item{endNode}{Optional end node of the path}
 
-\item{algorithm}{Which algorithm to run. Choices include "Bfs", "Dfs". Bfs
-(Breadth First Search) is the default; see
-<https://lemon.cs.elte.hu/pub/doc/1.3.1/a00608.html> for details on the
-differences.}
+\item{algorithm}{Choices of algorithm include "Bfs" (Breadth First Search)
+and "Dfs" (Depth First Search). Bfs is the default.}
 }
 \value{
 A list containing three entries: 1) the predecessor of each vertex
-  in its shortest path, 2) the distances from each node to the startNode ,
-  3) a list containing if a node was reached or not
+  in its shortest path, 2) the distances from each node to the startNode, 3)
+  a vector of logicals indicating whether a node was reached.
 }
 \description{
-Runs a common graph search algorithm to find the minimum cardinality shortest path.
-Finds the shortest path from/to all vertices if a start/end node are
-not given.
+Runs a common graph search algorithm to find the minimum cardinality
+shortest path. Finds the shortest path from/to all vertices if a start/end
+node are not given.
+}
+\details{
+For details on LEMON's implementation, including differences between the
+algorithms, see \url{https://lemon.cs.elte.hu/pub/doc/1.3.1/a00608.html}.
 }

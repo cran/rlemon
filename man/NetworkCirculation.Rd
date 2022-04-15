@@ -2,7 +2,7 @@
 % Please edit documentation in R/maxflow.R
 \name{NetworkCirculation}
 \alias{NetworkCirculation}
-\title{NetworkCirculation}
+\title{Solver for Network Circulation}
 \usage{
 NetworkCirculation(
   arcSources,
@@ -11,7 +11,7 @@ NetworkCirculation(
   arcUpperBound,
   nodeSupplies,
   numNodes,
-  algorithm
+  algorithm = "Circulation"
 )
 }
 \arguments{
@@ -32,15 +32,18 @@ graph.}
 
 \item{numNodes}{The number of nodes in the graph}
 
-\item{algorithm}{Which algorithm to run. Choices include "Circulation" where
-"Circulation" is the default. See
-<https://lemon.cs.elte.hu/pub/doc/1.3.1/a00078.html> for details on the
-differences.}
+\item{algorithm}{Choices of algorithminclude "Circulation". "Circulation" is
+the default.}
 }
 \value{
-A list containing two entries: 1) A list corresponding to the flows
-  of arcs in the graph, and 2) A list of the graph's barrier nodes.
+A list containing two entries: 1) A vector corresponding to the flows
+  of arcs in the graph, and 2) A vector of the graph's barrier nodes.
 }
 \description{
-Finds the solution to the network circulation problem via the push-relabel circulation algorithm.
+Finds the solution to the network circulation problem via the push-relabel
+circulation algorithm.
+}
+\details{
+For details on LEMON's implementation, including differences between the
+algorithms, see \url{https://lemon.cs.elte.hu/pub/doc/1.3.1/a00078.html}.
 }

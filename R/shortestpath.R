@@ -2,18 +2,18 @@
 ##' directed graph. These shortest path algorithms consider the distances present
 ##' in the graph, as well as the number of edges.
 ##'
-##' @title ShortestPathFromSource
+##' For details on LEMON's implementation, including differences between the
+##' algorithms, see \url{https://lemon.cs.elte.hu/pub/doc/1.3.1/a00609.html}.
+##' @title Solve for Shortest Path from Source Node to All Other Nodes
 ##' @param arcSources Vector corresponding to the source nodes of a graph's
 ##'   edges
 ##' @param arcTargets Vector corresponding to the destination nodes of a graph's
 ##'   edges
 ##' @param arcDistances Vector corresponding to the distances of a graph's edges
 ##' @param numNodes The number of nodes in the graph
-##' @param sourceNode The start node of the path
-##' @param algorithm Which algorithm to run. Choices include "Dijkstra",
-##'   "BellmanFord" where "Dijkstra" is the default. See
-##'   <https://lemon.cs.elte.hu/pub/doc/1.3.1/a00609.html> for details on the
-##'   differences.
+##' @param sourceNode The source node
+##' @param algorithm Choices of algorithm include "Dijkstra" and "BellmanFord".
+##'   "Dijkstra" is the default.
 ##' @return A list containing two entries: 1) the distances from each node to
 ##'   the startNode and 2) the predecessor of each vertex in its shortest path.
 ##' @export
@@ -23,27 +23,27 @@ ShortestPathFromSource <- function(arcSources,
                                    numNodes,
                                    sourceNode,
                                    algorithm = "Dijkstra") {
+
   check_graph_vertices(arcSources, arcTargets, numNodes)
   check_arc_map(arcSources, arcTargets, arcDistances, numNodes)
   check_node(sourceNode, numNodes)
+  check_algorithm(algorithm)
 
   switch(algorithm,
-    "Dijkstra" = .Call(
-      `_rlemon_DijkstraRunner`, arcSources, arcTargets,
-      arcDistances, numNodes, sourceNode
-    ),
-    "BellmanFord" = .Call(
-      `_rlemon_BellmanFordRunner`, arcSources, arcTargets,
-      arcDistances, numNodes, sourceNode
-    ),
-    stop("Invalid algorithm.")
-  )
+         "Dijkstra" = DijkstraRunner(arcSources, arcTargets, arcDistances, numNodes,
+                                     sourceNode),
+         "BellmanFord" = BellmanFordRunner(arcSources, arcTargets, arcDistances,
+                                           numNodes, sourceNode),
+         stop("Invalid algorithm.")
+         )
 }
 
 ##' Finds the shortest arc disjoint paths between two nodes in a directed graph.
 ##' This implementation runs a variation of the successive shortest path algorithm.
 ##'
-##' @title ShortestPath
+##' For details on LEMON's implementation, including differences between the
+##' algorithms, see \url{https://lemon.cs.elte.hu/pub/doc/1.3.1/a00609.html}.
+##' @title Solver for Shortest Path Between Two Nodes
 ##' @param arcSources Vector corresponding to the source nodes of a graph's
 ##'   edges
 ##' @param arcTargets Vector corresponding to the destination nodes of a graph's
@@ -52,11 +52,11 @@ ShortestPathFromSource <- function(arcSources,
 ##' @param numNodes The number of nodes in the graph
 ##' @param sourceNode The start node of the path
 ##' @param destNode The end node of the path
-##' @param algorithm Which algorithm to run. Choices include "Suurballe" where
-##'   "Suurballe" is the default. See
-##'   <https://lemon.cs.elte.hu/pub/doc/1.3.1/a00420.html> for more information.
+##' @param algorithm Choices of algorithm include "Suurballe". "Suurballe" is
+##'   the default.
 ##' @return A list containing two entries: 1) the number of paths from the start
-##'   node to the end node and 2) a list of paths found.
+##'   node to the end node and 2) a list of paths found. If there are multiple
+##'   paths, then the second entry will have multiple paths.
 ##' @export
 ShortestPath <- function(arcSources,
                          arcTargets,
@@ -65,16 +65,16 @@ ShortestPath <- function(arcSources,
                          sourceNode,
                          destNode,
                          algorithm = "Suurballe") {
+
   check_graph_vertices(arcSources, arcTargets, numNodes)
   check_arc_map(arcSources, arcTargets, arcDistances, numNodes)
   check_node(sourceNode, numNodes)
   check_node(destNode, numNodes)
+  check_algorithm(algorithm)
 
   switch(algorithm,
-    "Suurballe" = .Call(
-      `_rlemon_SuurballeRunner`, arcSources, arcTargets,
-      arcDistances, numNodes, sourceNode, destNode
-    ),
-    stop("Invalid algorithm.")
-  )
+         "Suurballe" = SuurballeRunner(arcSources, arcTargets, arcDistances,
+                                       numNodes, sourceNode, destNode),
+         stop("Invalid algorithm.")
+         )
 }

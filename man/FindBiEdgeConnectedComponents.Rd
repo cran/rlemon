@@ -2,7 +2,7 @@
 % Please edit documentation in R/connectivity.R
 \name{FindBiEdgeConnectedComponents}
 \alias{FindBiEdgeConnectedComponents}
-\title{FindBiEdgeConnectedComponents}
+\title{Find Bi-Edge-Connected Components}
 \usage{
 FindBiEdgeConnectedComponents(arcSources, arcTargets, numNodes)
 }
@@ -16,10 +16,14 @@ edges}
 \item{numNodes}{The number of nodes in the graph}
 }
 \value{
-A list containing the node id of each bi-edge-connected component.
+A vector containing the node id of each bi-edge-connected component.
 }
 \description{
-Finds the bi-edge-connected components of an undirected graph.
-See 'https://lemon.cs.elte.hu/pub/doc/1.3.1/a00616.html#ga76c1fdd1881d21677507100b7e96c983'
+The bi-edge-connected components are the classes of an equivalence relation
+on the nodes of an undirected graph. Two nodes are in the same class if they
+are connected with at least two edge-disjoint paths.
+}
+\details{
+See \url{https://lemon.cs.elte.hu/pub/doc/1.3.1/a00616.html#ga76c1fdd1881d21677507100b7e96c983}
 for more information.
 }

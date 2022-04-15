@@ -2,7 +2,7 @@
 % Please edit documentation in R/maxflow.R
 \name{MaxFlow}
 \alias{MaxFlow}
-\title{MaxFlow}
+\title{Solver for MaxFlow}
 \usage{
 MaxFlow(
   arcSources,
@@ -11,7 +11,7 @@ MaxFlow(
   sourceNode,
   destNode,
   numNodes,
-  algorithm
+  algorithm = "Preflow"
 )
 }
 \arguments{
@@ -30,16 +30,19 @@ graph's edges}
 
 \item{numNodes}{The number of nodes in the graph}
 
-\item{algorithm}{Which algorithm to run. Choices include "Preflow",
-"EdmondsKarp", where "Preflow" is the default. See
-<https://lemon.cs.elte.hu/pub/doc/1.3.1/a00611.html> for details on the
-differences.}
+\item{algorithm}{Choices of algorithm include "Preflow" and "EdmondsKarp".
+"Preflow" is the default.}
 }
 \value{
-A list containing three entries: 1) A list corresponding to the
-  flows of arcs in the graph, 2) A list of cut-values of the graph's nodes,
+A list containing three entries: 1) A vector corresponding to the
+  flows of arcs in the graph, 2) A vector of cut-values of the graph's nodes,
   and 3) the total cost of the flows in the graph, i.e. the maxflow value.
 }
 \description{
-Finds the maximum flow of a directed graph, given a source and destination node.
+Finds the maximum flow of a directed graph, given a source and destination
+node.
+}
+\details{
+For details on LEMON's implementation, including differences between the
+algorithms, see \url{https://lemon.cs.elte.hu/pub/doc/1.3.1/a00611.html}.
 }

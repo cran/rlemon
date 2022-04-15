@@ -2,7 +2,7 @@
 % Please edit documentation in R/connectivity.R
 \name{IsAcyclic}
 \alias{IsAcyclic}
-\title{IsAcylic}
+\title{Check if Graph is Acyclic.}
 \usage{
 IsAcyclic(arcSources, arcTargets, numNodes)
 }
@@ -16,10 +16,13 @@ edges}
 \item{numNodes}{The number of nodes in the graph}
 }
 \value{
-A boolean stating if the graph is acyclic
+A \code{logical} stating if the graph is acyclic
 }
 \description{
-Checks if an undirected graph is acyclic.
-See 'https://lemon.cs.elte.hu/pub/doc/1.3.1/a00616.html#ga14c191b2133a1dd23e1527f074c821c0'
+A cycle is a path starting and ending in the same node and containing at
+least one other node. A acyclic graph contains no cycles.
+}
+\details{
+See \url{https://lemon.cs.elte.hu/pub/doc/1.3.1/a00616.html#ga14c191b2133a1dd23e1527f074c821c0}
 for more information.
 }

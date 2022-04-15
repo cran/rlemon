@@ -2,7 +2,7 @@
 % Please edit documentation in R/planarityembedding.R
 \name{PlanarChecking}
 \alias{PlanarChecking}
-\title{PlanarChecking}
+\title{Check if Graph is Planar}
 \usage{
 PlanarChecking(arcSources, arcTargets, numNodes)
 }
@@ -16,10 +16,12 @@ edges}
 \item{numNodes}{The number of nodes in the graph}
 }
 \value{
-A boolean stating if the graph is planar or not.
+A \code{logical} stating if the graph is planar or not.
 }
 \description{
 Checks if an undirected graph is planar.
-See 'https://lemon.cs.elte.hu/pub/doc/1.3.1/a00617.html#ga230242aa2ee36f9b1b5a58f2c53016eb'
+}
+\details{
+See \url{https://lemon.cs.elte.hu/pub/doc/1.3.1/a00617.html#ga230242aa2ee36f9b1b5a58f2c53016eb}
 for more information.
 }

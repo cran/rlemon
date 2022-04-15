@@ -2,7 +2,7 @@
 % Please edit documentation in R/connectivity.R
 \name{GetBipartitePartitions}
 \alias{GetBipartitePartitions}
-\title{GetBipartitePartitions}
+\title{Obtains (if possible) Bipartite Split}
 \usage{
 GetBipartitePartitions(arcSources, arcTargets, numNodes)
 }
@@ -16,12 +16,16 @@ edges}
 \item{numNodes}{The number of nodes in the graph}
 }
 \value{
-A list containing 1) A boolean stating if the graph is bipartite,
-  and 2) A list of length numNodes, containing the partition for each node
+A list containing 1) A \code{logical} stating if the graph is
+  bipartite, and 2) A vector of length \code{numNodes}, containing the
+  partition for each node
 }
 \description{
 Checks if an undirected graph is bipartite and finds the bipartite
 partitions.
-See 'https://lemon.cs.elte.hu/pub/doc/1.3.1/a00616.html#ga58ba1d00c569f0eb0deb42afca9f80bb'
+}
+\details{
+See
+\url{https://lemon.cs.elte.hu/pub/doc/1.3.1/a00616.html#ga58ba1d00c569f0eb0deb42afca9f80bb}
 for more information.
 }

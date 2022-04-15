@@ -2,7 +2,7 @@
 % Please edit documentation in R/minimumspanningtree.R
 \name{MinCostArborescence}
 \alias{MinCostArborescence}
-\title{MinCostArborescence}
+\title{Solver for Minimum Cost Arborescence}
 \usage{
 MinCostArborescence(
   arcSources,
@@ -27,16 +27,20 @@ graph's edges}
 
 \item{numNodes}{The number of nodes in the graph}
 
-\item{algorithm}{Which algorithm to run. Choices include
-"MinCostArborescence" where "MinCostArborescence" is the default. See
-<https://lemon.cs.elte.hu/pub/doc/1.3.1/a00264.html> for more information.}
+\item{algorithm}{Choices of algorithm include "MinCostArborescence".
+"MinCostArborescence" is the default.}
 }
 \value{
-A list containing three entries: 1) Two vectors corresponding the
-  source and target nodes of the edges in the tree, and 2) the total cost of
-  the arborescence.
+A list containing three entries: 1) A vector corresponding the
+  source nodes of the edges in the tree, 2) a vector corresponding the
+  target nodes of the edges in the tree, and 3) the total cost of the
+  arborescence.
 }
 \description{
 Finds the minimum cost arborescence of a graph, returning both the cost and
 the pairs of nodes for the edges in the arborescence.
+}
+\details{
+For details on LEMON's implementation, including differences between the
+algorithms, see \url{https://lemon.cs.elte.hu/pub/doc/1.3.1/a00264.html}.
 }

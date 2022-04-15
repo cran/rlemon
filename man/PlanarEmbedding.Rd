@@ -2,7 +2,7 @@
 % Please edit documentation in R/planarityembedding.R
 \name{PlanarEmbedding}
 \alias{PlanarEmbedding}
-\title{PlanarEmbedding}
+\title{Solver for Planar Embedding}
 \usage{
 PlanarEmbedding(arcSources, arcTargets, numNodes)
 }
@@ -16,14 +16,16 @@ edges}
 \item{numNodes}{The number of nodes in the graph}
 }
 \value{
-A list containing 1) A boolean if the graph is planar, 2) the start
-  nodes of the arcs of the embedding, 3) the end nodes of the arcs of the
-  planar embedding, 4) the start nodes of the edges of the kuratowski
+A list containing 1) A logical indicating if the graph is planar, 2)
+  the start nodes of the arcs of the embedding, 3) the end nodes of the arcs
+  of the planar embedding, 4) the start nodes of the edges of the kuratowski
   subdivision, 5) the end nodes of the edges of the kuratowski subdivision.
 }
 \description{
 Checks if an undirected graph is planar and returns a list of outputs
 related to the planar embedding
-See 'https://lemon.cs.elte.hu/pub/doc/1.3.1/a00308.html'
+}
+\details{
+See \url{https://lemon.cs.elte.hu/pub/doc/1.3.1/a00308.html}
 for more information.
 }

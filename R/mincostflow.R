@@ -1,6 +1,8 @@
 ##' Finds the minimum cost flow of a directed graph.
 ##'
-##' @title MinCostFlow
+##' For details on LEMON's implementation, including differences between the
+##' algorithms, see \url{https://lemon.cs.elte.hu/pub/doc/1.3.1/a00612.html}.
+##' @title Solver for MinCostFlow
 ##' @param arcSources Vector corresponding to the source nodes of a graph's
 ##'   edges
 ##' @param arcTargets Vector corresponding to the destination nodes of a graph's
@@ -11,14 +13,14 @@
 ##'   edges
 ##' @param nodeSupplies Vector corresponding to the supplies of each node
 ##' @param numNodes The number of nodes in the graph
-##' @param algorithm Which algorithm to run. Choices include "NetworkSimplex",
-##'   "CostScaling", "CapacityScaling", "CycleCancelling". NetworkSimplex is the
-##'   default; see <https://lemon.cs.elte.hu/pub/doc/1.3.1/a00612.html> for
-##'   details on the differences.
-##' @return A list containing three entries: 1) A list corresponding to the
-##'   flows of arcs in the graph, 2) A list of potentials of the graph's nodes,
-##'   and 3) the total cost of the flows in the graph, i.e. the mincostflow
-##'   value
+##' @param algorithm Choices of algorithm include "NetworkSimplex",
+##'   "CostScaling", "CapacityScaling", and "CycleCancelling". NetworkSimplex is
+##'   the default.
+##' @return A list containing three entries: 1) A vector corresponding to the
+##'   flows of arcs in the graph, 2) A vector of potentials of the graph's
+##'   nodes, 3) the total cost of the flows in the graph, i.e. the mincostflow
+##'   value, and 4) LEMON's feasibility type, demonstrating how feasible the
+##'   graph problem is, one of "INFEASIBLE", "OPTIMAL", and "UNBOUNDED"
 ##' @export
 MinCostFlow <- function(arcSources,
                         arcTargets,
@@ -27,6 +29,7 @@ MinCostFlow <- function(arcSources,
                         nodeSupplies,
                         numNodes,
                         algorithm = "NetworkSimplex") {
+
   check_graph(
     arcSources, arcTargets, arcCapacities, arcCosts, nodeSupplies,
     numNodes
@@ -36,28 +39,21 @@ MinCostFlow <- function(arcSources,
   check_arc_map(arcSources, arcTargets, arcCosts, numNodes)
   check_arc_map(arcSources, arcTargets, arcCosts, numNodes)
   check_node_map(nodeSupplies, numNodes)
+  check_algorithm(algorithm)
 
   switch(algorithm,
-    "NetworkSimplex" =
-      .Call(
-        `_rlemon_NetworkSimplexRunner`, arcSources, arcTargets,
-        arcCapacities, arcCosts, nodeSupplies, numNodes
-      ),
-    "CostScaling" =
-      .Call(
-        `_rlemon_CostScalingRunner`, arcSources, arcTargets,
-        arcCapacities, arcCosts, nodeSupplies, numNodes
-      ),
-    "CapacityScaling" =
-      .Call(
-        `_rlemon_CapacityScalingRunner`, arcSources, arcTargets,
-        arcCapacities, arcCosts, nodeSupplies, numNodes
-      ),
-    "CycleCancelling" =
-      .Call(
-        `_rlemon_CycleCancellingRunner`, arcSources, arcTargets,
-        arcCapacities, arcCosts, nodeSupplies, numNodes
-      ),
-    stop("Invalid algorithm.")
-  )
+         "NetworkSimplex" = NetworkSimplexRunner(arcSources, arcTargets,
+                                                 arcCapacities, arcCosts,
+                                                 nodeSupplies, numNodes),
+         "CostScaling" = CostScalingRunner(arcSources, arcTargets,
+                                           arcCapacities, arcCosts,
+                                           nodeSupplies, numNodes),
+         "CapacityScaling" = CapacityScalingRunner(arcSources, arcTargets,
+                                                   arcCapacities, arcCosts,
+                                                   nodeSupplies, numNodes),
+         "CycleCancelling" = CycleCancellingRunner(arcSources, arcTargets,
+                                                   arcCapacities, arcCosts,
+                                                   nodeSupplies, numNodes),
+         stop("Invalid algorithm.")
+         )
 }

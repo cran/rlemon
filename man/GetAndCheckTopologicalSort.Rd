@@ -2,7 +2,7 @@
 % Please edit documentation in R/connectivity.R
 \name{GetAndCheckTopologicalSort}
 \alias{GetAndCheckTopologicalSort}
-\title{GetAndCheckTopologicalSort}
+\title{Check if Graph is DAG, then Sorts Nodes into Topological Order}
 \usage{
 GetAndCheckTopologicalSort(arcSources, arcTargets, numNodes)
 }
@@ -16,12 +16,15 @@ edges}
 \item{numNodes}{The number of nodes in the graph}
 }
 \value{
-A list containing 1) A boolean stating if the graph is a dag, and 2)
-  A vector of length numNodes, containing the index of vertex i in the
-  ordering at location i
+A list containing 1) A \code{logical} stating if the graph is a dag,
+  and 2) A vector of length \code{numNodes}, containing the index of vertex
+  i in the ordering at location i
 }
 \description{
 Checks if a directed graph is a DAG and returns the topological order.
-See 'https://lemon.cs.elte.hu/pub/doc/1.3.1/a00616.html#gafc2cb20cf3859f157c0e12da7f310bb3'
+}
+\details{
+See
+\url{https://lemon.cs.elte.hu/pub/doc/1.3.1/a00616.html#gaf10c5e1630e5720c20d83cfb77dbf024}
 for more information.
 }

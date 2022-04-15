@@ -2,7 +2,7 @@
 % Please edit documentation in R/connectivity.R
 \name{GetTopologicalSort}
 \alias{GetTopologicalSort}
-\title{GetTopologicalSort}
+\title{Sorts Nodes into Topological Order}
 \usage{
 GetTopologicalSort(arcSources, arcTargets, numNodes)
 }
@@ -16,11 +16,14 @@ edges}
 \item{numNodes}{The number of nodes in the graph}
 }
 \value{
-A list of length numNodes, containing the index of vertex i in the
-  ordering at location i.
+A vector of length \code{numNodes}, containing the index of vertex i
+  in the ordering at location i.
 }
 \description{
 Gives back the topological order of a DAG.
-See 'https://lemon.cs.elte.hu/pub/doc/1.3.1/a00616.html#gafc2cb20cf3859f157c0e12da7f310bb3'
+}
+\details{
+See
+\url{https://lemon.cs.elte.hu/pub/doc/1.3.1/a00616.html#gafc2cb20cf3859f157c0e12da7f310bb3}
 for more information.
 }

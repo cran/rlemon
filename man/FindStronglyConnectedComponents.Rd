@@ -2,7 +2,7 @@
 % Please edit documentation in R/connectivity.R
 \name{FindStronglyConnectedComponents}
 \alias{FindStronglyConnectedComponents}
-\title{FindStronglyConnectedComponents}
+\title{Find Strongly Connected Components}
 \usage{
 FindStronglyConnectedComponents(arcSources, arcTargets, numNodes)
 }
@@ -16,10 +16,14 @@ edges}
 \item{numNodes}{The number of nodes in the graph}
 }
 \value{
-A list containing the node id of each strongly connected component.
+A vector containing the node id of each strongly connected component.
 }
 \description{
-Finds the strongly connected components in a directed graph.
-See 'https://lemon.cs.elte.hu/pub/doc/1.3.1/a00616.html#ga46f8c22f3e2989c4689faa4c46ec9436'
+The strongly connected components are the classes of an equivalence relation
+on the nodes of a directed graph. Two nodes are in the same class if they
+are connected with directed paths in both direction.
+}
+\details{
+See \url{https://lemon.cs.elte.hu/pub/doc/1.3.1/a00616.html#ga46f8c22f3e2989c4689faa4c46ec9436}
 for more information.
 }

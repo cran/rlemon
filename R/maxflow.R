@@ -1,6 +1,9 @@
-##' Finds the maximum flow of a directed graph, given a source and destination node.
+##' Finds the maximum flow of a directed graph, given a source and destination
+##' node.
 ##'
-##' @title MaxFlow
+##' For details on LEMON's implementation, including differences between the
+##' algorithms, see \url{https://lemon.cs.elte.hu/pub/doc/1.3.1/a00611.html}.
+##' @title Solver for MaxFlow
 ##' @param arcSources Vector corresponding to the source nodes of a graph's
 ##'   edges
 ##' @param arcTargets Vector corresponding to the destination nodes of a graph's
@@ -10,12 +13,10 @@
 ##' @param sourceNode The source node
 ##' @param destNode The destination node
 ##' @param numNodes The number of nodes in the graph
-##' @param algorithm Which algorithm to run. Choices include "Preflow",
-##'   "EdmondsKarp", where "Preflow" is the default. See
-##'   <https://lemon.cs.elte.hu/pub/doc/1.3.1/a00611.html> for details on the
-##'   differences.
-##' @return A list containing three entries: 1) A list corresponding to the
-##'   flows of arcs in the graph, 2) A list of cut-values of the graph's nodes,
+##' @param algorithm Choices of algorithm include "Preflow" and "EdmondsKarp".
+##'   "Preflow" is the default.
+##' @return A list containing three entries: 1) A vector corresponding to the
+##'   flows of arcs in the graph, 2) A vector of cut-values of the graph's nodes,
 ##'   and 3) the total cost of the flows in the graph, i.e. the maxflow value.
 ##' @export
 MaxFlow <- function(arcSources,
@@ -24,28 +25,31 @@ MaxFlow <- function(arcSources,
                     sourceNode,
                     destNode,
                     numNodes,
-                    algorithm) {
+                    algorithm = "Preflow") {
+
   check_graph_vertices(arcSources, arcTargets, numNodes)
   check_arc_map(arcSources, arcTargets, arcCapacities, numNodes)
   check_node(sourceNode, numNodes)
   check_node(destNode, numNodes)
+  check_algorithm(algorithm)
 
   switch(algorithm,
-    "Preflow" = .Call(
-      `_rlemon_PreflowRunner`, arcSources, arcTargets,
-      arcCapacities, sourceNode, destNode, numNodes
-    ),
-    "EdmondsKarp" = .Call(
-      `_rlemon_EdmondsKarpRunner`, arcSources, arcTargets,
-      arcCapacities, sourceNode, destNode, numNodes
-    ),
-    stop("Invalid algorithm.")
-  )
+         "Preflow" = PreflowRunner(arcSources, arcTargets, arcCapacities, sourceNode,
+                                   destNode, numNodes),
+         "EdmondsKarp" = EdmondsKarpRunner(arcSources, arcTargets,
+                                           arcCapacities, sourceNode, destNode,
+                                           numNodes),
+         stop("Invalid algorithm.")
+         )
 }
 
-##' Finds the solution to the network circulation problem via the push-relabel circulation algorithm.
+##' Finds the solution to the network circulation problem via the push-relabel
+##' circulation algorithm.
 ##'
-##' @title NetworkCirculation
+
+##' For details on LEMON's implementation, including differences between the
+##' algorithms, see \url{https://lemon.cs.elte.hu/pub/doc/1.3.1/a00078.html}.
+##' @title Solver for Network Circulation
 ##' @param arcSources Vector corresponding to the source nodes of a graph's
 ##'   edges
 ##' @param arcTargets Vector corresponding to the destination nodes of a graph's
@@ -57,12 +61,10 @@ MaxFlow <- function(arcSources,
 ##' @param nodeSupplies Vector corresponding to the supplies of each node of the
 ##'   graph.
 ##' @param numNodes The number of nodes in the graph
-##' @param algorithm Which algorithm to run. Choices include "Circulation" where
-##'   "Circulation" is the default. See
-##'   <https://lemon.cs.elte.hu/pub/doc/1.3.1/a00078.html> for details on the
-##'   differences.
-##' @return A list containing two entries: 1) A list corresponding to the flows
-##'   of arcs in the graph, and 2) A list of the graph's barrier nodes.
+##' @param algorithm Choices of algorithminclude "Circulation". "Circulation" is
+##'   the default.
+##' @return A list containing two entries: 1) A vector corresponding to the flows
+##'   of arcs in the graph, and 2) A vector of the graph's barrier nodes.
 ##' @export
 NetworkCirculation <- function(arcSources,
                                arcTargets,
@@ -70,18 +72,18 @@ NetworkCirculation <- function(arcSources,
                                arcUpperBound,
                                nodeSupplies,
                                numNodes,
-                               algorithm) {
+                               algorithm = "Circulation") {
+
   check_graph_vertices(arcSources, arcTargets, numNodes)
   check_arc_map(arcSources, arcTargets, arcLowerBound, numNodes)
   check_arc_map(arcSources, arcTargets, arcUpperBound, numNodes)
   check_node_map(nodeSupplies, numNodes)
+  check_algorithm(algorithm)
 
   switch(algorithm,
-    "Circulation" = .Call(
-      `_rlemon_CirculationRunner`, arcSources, arcTargets,
-      arcLowerBound, arcUpperBound, nodeSupplies,
-      numNodes
-    ),
-    stop("Invalid algorithm.")
-  )
+         "Circulation" = CirculationRunner(arcSources, arcTargets,
+                                           arcLowerBound, arcUpperBound,
+                                           nodeSupplies, numNodes),
+         stop("Invalid algorithm.")
+         )
 }

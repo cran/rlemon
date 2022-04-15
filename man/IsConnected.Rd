@@ -2,7 +2,7 @@
 % Please edit documentation in R/connectivity.R
 \name{IsConnected}
 \alias{IsConnected}
-\title{IsConnected}
+\title{Check if Graph is Connected}
 \usage{
 IsConnected(arcSources, arcTargets, numNodes)
 }
@@ -16,10 +16,12 @@ edges}
 \item{numNodes}{The number of nodes in the graph}
 }
 \value{
-A boolean stating if the graph is connected
+A \code{logical} stating if the graph is connected
 }
 \description{
-Checks if an undirected graph is connected.
-See 'https://lemon.cs.elte.hu/pub/doc/1.3.1/a00616.html#gad5c8d1b650f6b614a852f8430d90e184'
+A connected graph has a path between any two nodes in the graph.
+}
+\details{
+See \url{https://lemon.cs.elte.hu/pub/doc/1.3.1/a00616.html#gad5c8d1b650f6b614a852f8430d90e184}
 for more information.
 }

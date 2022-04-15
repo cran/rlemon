@@ -25,7 +25,11 @@ test_that("check_graph_vertices", {
   t <- c(3, 4, 3)
   n <- 4
   expect_error(check_graph_vertices(s, t, n))
-  s <- c(0, 2, 5)
+  s <- c(1, 2, 5)
+  t <- c(3, 4, 3)
+  n <- 4
+  expect_error(check_graph_vertices(s, t, n))
+  s <- c(0, 2, 4)
   t <- c(3, 4, 3)
   n <- 4
   expect_error(check_graph_vertices(s, t, n))
@@ -41,6 +45,7 @@ test_that("check_graph_vertices", {
   s <- c(1.5, 2.5, 3.5)
   t <- 1:3
   expect_error(check_graph_vertices(s, t, n))
+
 
 })
 
@@ -88,4 +93,14 @@ test_that("check_graph_arcs", {
   s <- c(1, 2, 3)
   t <- c(1, 2, 3)
   expect_true(check_graph_arcs(s, t))
+})
+
+test_that("check_algorithm", {
+  expect_error(check_algorithm(1))
+  expect_error(check_algorithm(NULL))
+  expect_error(check_algorithm(data.frame("a")))
+  expect_error(check_algorithm(matrix("a")))
+  expect_error(check_algorithm(c("a", "b")))
+
+  expect_true(check_algorithm("abc"))
 })

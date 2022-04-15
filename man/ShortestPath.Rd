@@ -2,7 +2,7 @@
 % Please edit documentation in R/shortestpath.R
 \name{ShortestPath}
 \alias{ShortestPath}
-\title{ShortestPath}
+\title{Solver for Shortest Path Between Two Nodes}
 \usage{
 ShortestPath(
   arcSources,
@@ -29,15 +29,19 @@ edges}
 
 \item{destNode}{The end node of the path}
 
-\item{algorithm}{Which algorithm to run. Choices include "Suurballe" where
-"Suurballe" is the default. See
-<https://lemon.cs.elte.hu/pub/doc/1.3.1/a00420.html> for more information.}
+\item{algorithm}{Choices of algorithm include "Suurballe". "Suurballe" is
+the default.}
 }
 \value{
 A list containing two entries: 1) the number of paths from the start
-  node to the end node and 2) a list of paths found.
+  node to the end node and 2) a list of paths found. If there are multiple
+  paths, then the second entry will have multiple paths.
 }
 \description{
 Finds the shortest arc disjoint paths between two nodes in a directed graph.
 This implementation runs a variation of the successive shortest path algorithm.
+}
+\details{
+For details on LEMON's implementation, including differences between the
+algorithms, see \url{https://lemon.cs.elte.hu/pub/doc/1.3.1/a00609.html}.
 }

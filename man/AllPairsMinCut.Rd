@@ -2,9 +2,15 @@
 % Please edit documentation in R/mincut.R
 \name{AllPairsMinCut}
 \alias{AllPairsMinCut}
-\title{AllPairsMinCut}
+\title{Solver for All-Pairs MinCut}
 \usage{
-AllPairsMinCut(arcSources, arcTargets, arcWeights, numNodes, algorithm)
+AllPairsMinCut(
+  arcSources,
+  arcTargets,
+  arcWeights,
+  numNodes,
+  algorithm = "GomoryHu"
+)
 }
 \arguments{
 \item{arcSources}{Vector corresponding to the source nodes of a graph's
@@ -17,15 +23,19 @@ edges}
 
 \item{numNodes}{The number of nodes in the graph}
 
-\item{algorithm}{Which algorithm to run. Choices include "GomoryHu"
- where GomoryHu is the default; see
-<https://lemon.cs.elte.hu/pub/doc/1.3.1/a00182.html> for more information.}
+\item{algorithm}{Choices of algorithm include "GomoryHu". "GomoryHu" is the
+default.}
 }
 \value{
-A list containing three entries: 1) A list of predecessor nodes of
-  each node in the graph, and 2) A list of weights of the predecessor edge
-  of each node, and 3) A list of distances from the root node to each node.
+A list containing three entries: 1) A vector of predecessor nodes of
+  each node in the graph, and 2) A vector of weights of the predecessor edge
+  of each node, and 3) A vector of distances from the root node to each
+  node.
 }
 \description{
 Finds the all-pairs minimum cut tree, using the Gomory-Hu algorithm.
+}
+\details{
+For details on LEMON's implementation, including differences between the
+algorithms, see \url{https://lemon.cs.elte.hu/pub/doc/1.3.1/a00182.html}.
 }

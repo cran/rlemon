@@ -2,7 +2,7 @@
 % Please edit documentation in R/minimumspanningtree.R
 \name{MinSpanningTree}
 \alias{MinSpanningTree}
-\title{MinSpanningTree}
+\title{Solver for Minimum Spanning Tree}
 \usage{
 MinSpanningTree(
   arcSources,
@@ -24,18 +24,22 @@ graph's edges}
 
 \item{numNodes}{The number of nodes in the graph}
 
-\item{algorithm}{Which algorithm to run. Choices include "Kruskal" where
-"Kruskal" is the default. See
-<https://lemon.cs.elte.hu/pub/doc/1.3.1/a00610.html#ga233792b2c44a3581b85a775703e045af>
-for more information.}
+\item{algorithm}{Choices of algorithm include "Kruskal". "Kruskal" is the
+default.}
 }
 \value{
-A list containing three entries: 1) Two vectors corresponding the
-  source and target nodes of the edges in the tree, and 2) the total minimum
-  spanning tree value.
+A list containing three entries: 1) A vector corresponding the
+  source nodes of the edges in the tree, 2) a vector corresponding the
+  target nodes of the edges in the tree, and 3) the total minimum spanning
+  tree value.
 }
 \description{
 Finds the minimum spanning tree of a graph.
 The minimum spanning tree is the minimal connected acyclic subgraph of a graph,
 assuming the graph is undirected.
+}
+\details{
+For details on LEMON's implementation, including differences between the
+algorithms, see
+\url{https://lemon.cs.elte.hu/pub/doc/1.3.1/a00610.html#ga233792b2c44a3581b85a775703e045af}
 }
