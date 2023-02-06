@@ -1,7 +1,7 @@
 Package: rlemon
 Type: Package
 Title: R Access to LEMON Graph Algorithms
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: c(person("Arav", "Agarwal", role = "aut", email = "arava@andrew.cmu.edu"),
              person("Aditya", "Tewari", role = "aut", email = "atewari@palantir.com"),
              person("Josh", "Errickson", role = c("cre","aut"), email = "jerrick@umich.edu"))
@@ -13,17 +13,17 @@ Imports: Rcpp (>= 1.0.5)
 LinkingTo: Rcpp
 URL: https://errickson.net/rlemon/
 BugReports: https://github.com/josherrickson/rlemon/issues/
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.3
 Encoding: UTF-8
 Suggests: testthat, covr
 Depends: R (>= 2.10)
 LazyData: true
 Language: en-US
 NeedsCompilation: yes
-Packaged: 2022-04-15 13:07:34 UTC; josh
+Packaged: 2023-02-06 15:22:32 UTC; josh
 Author: Arav Agarwal [aut],
   Aditya Tewari [aut],
   Josh Errickson [cre, aut]
 Maintainer: Josh Errickson <jerrick@umich.edu>
 Repository: CRAN
-Date/Publication: 2022-04-15 15:40:02 UTC
+Date/Publication: 2023-02-06 21:42:31 UTC

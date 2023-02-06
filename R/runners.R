@@ -1,4 +1,5 @@
-##' These "runner" functions provide a slightly lower-level access to LEMON.
+##' These "runner" functions provide a slightly lower-level access to LEMON. See
+##' "Details".
 ##'
 ##' Internally, all exported rlemon functions call a "runner" function to
 ##' interface with the C++, for example, \code{MaxFlow(..., algorithm =
@@ -6,12 +7,13 @@
 ##'
 ##' In almost all cases, users will want to stick with the exported functions.
 ##'
-##' Runners differ from exported functions in two significant way and one
-##' minor way:
+##' Runners differ from exported functions in a few ways:
 ##' \enumerate{
 ##'  \item Exported functions provide input checking.
 ##'  \item Exported functions provide slightly cleaner output, such as
 ##'        converting 0/1 boolean into \code{logical}.
+##'  \item Any \code{list} which is returned from an exported function will be
+##'        named.
 ##'  \item The \code{arcWeights} argument is optional to \code{MaxMatching()},
 ##'        automatically generating a constant weight if it is excluded.
 ##'        \code{arcWeights} is not optional in \code{MaxMatchingRunner()}.
